@@ -36,7 +36,9 @@ if (GitHubResult.total_count > 0) {
 		subxReq.send(null);
 		try { // find search condition for html/css/js files only...|GitHubResult.total_count (eject read.me...
 		document.getElementById("SearchResult").innerHTML += subxReq.responseText.match(/<title>.*<\/title>/)[0].replace("<title>","").replace("</title>","");
-		document.getElementById("SearchResult").innerHTML += " - <a contentEditable='false' href='#' onclick='window.alert(\"todo\");'>select</a>" + "<br />";
+		document.getElementById("SearchResult").innerHTML += " - <a contentEditable='false' href='#' onclick='
+			VH20.CurrentTarget.innerHTML += subxReq.responseText.match(/<body>.*<\/body>/)[0].replace("<body>","").replace("</body>","");
+			'>select</a>" + "<br />";
 		//document.getElementById("SearchResult").innerHTML += subxReq.responseText.match(/<title>.*<\/title>/)[0].replace("<title>","").replace("</title>","");
 		// meta description /keywords to add
 		} catch(xcp) {}
