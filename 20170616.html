@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Designer</title>
+<style>
+#Designer-Toolbar { position: relative; top: 0px; }
+</style>
+</head>
 
+<body>
+
+<form id="SearchDesigner" contentEditable="false">
+  <label>GitHub: <input id="SearchTerm" type="search" /></label>
+	<input onClick="test();" type="button" value="Search..." />
+	<div id="SearchResult">
+	</div>
+</form>
+
+<script>
+function test() {
+// !!!!!!!!!!!!THIS IS A DESIGNER CODE--------------------------------editor' function is allow all types of designer' transition (at load from initial web loc
+		// AT doc load, ----load also last designer used, switch from one designer to another
+var xReq = new XMLHttpRequest();
+xReq.open("GET", "https://api.github.com/search/code?q=repo:Visual-HTML/NotePad+"+document.getElementById("SearchTerm").value, false);
+xReq.send(null);
+var GitHubResult = JSON.parse(xReq.responseText);
+
+document.getElementById("SearchResult").innerHTML = "";
+document.getElementById("SearchResult").innerHTML += "Found: " + GitHubResult.total_count;
+document.getElementById("SearchResult").innerHTML += "<hr />";
+if (GitHubResult.total_count > 0) { 
+	for(var i = 0; i < GitHubResult.total_count ; i++) {		
+		//document.getElementById("SearchResult").innerHTML += GitHubResult.items[i].name;				
+		var subxReq = new XMLHttpRequest();
+		subxReq.open("GET", GitHubResult.items[i].html_url.replace("https://github.com/","https://raw.githubusercontent.com/").replace("/blob",""), false);
+		subxReq.send(null);
+		try { // find search condition for html/css/js files only...|GitHubResult.total_count (eject read.me...
+		document.getElementById("SearchResult").innerHTML += subxReq.responseText.match(/<title>.*<\/title>/)[0].replace("<title>","").replace("</title>","");
+		document.getElementById("SearchResult").innerHTML += " - <a contentEditable='false' href='#' onclick='window.alert(\"todo\");'>select</a>" + "<br />";
+		//document.getElementById("SearchResult").innerHTML += subxReq.responseText.match(/<title>.*<\/title>/)[0].replace("<title>","").replace("</title>","");
+		// meta description /keywords to add
+		} catch(xcp) {}
+	}
+}
+
+};
+</script>
+
+</body>
+</html>
