@@ -45,9 +45,8 @@ if (GitHubResult.total_count > 0) {
 
 };
 	
-function getControl(code) {
-	
-			VH20.CurrentTarget.innerHTML += code.match(/<body>.*<\/body>/)[0].replace("<body>","").replace("</body>","");
+function getControl(TextCode) {
+			VH20.CurrentTarget.innerHTML += TextCode.match(/<body>.*<\/body>/)[0].replace("<body>","").replace("</body>","");
 }
 </script>
 
