@@ -51,7 +51,7 @@ function injectCode(url) {
 	xReq.open("GET", url, false);
 	xReq.send(null);
 	
-	VH20.CurrentTarget.innerHTML +=  xReq.response.match(/<body>.*<\/body>/)[0].replace("<body>","").replace("</body>","");
+	VH20.CurrentTarget.innerHTML += xReq.response.replace(/\n/g,"").match(/<body>.*<\/body>/)[0].replace("<body>","").replace("</body>","");
 };
 	
 </script>
