@@ -36,7 +36,7 @@ if (GitHubResult.total_count > 0) {
 		subxReq.send(null);
 		try { // find search condition for html/css/js files only...|GitHubResult.total_count (eject read.me...
 		document.getElementById("SearchResult").innerHTML += subxReq.responseText.match(/<title>.*<\/title>/)[0].replace("<title>","").replace("</title>","");
-		document.getElementById("SearchResult").innerHTML += " - <a contentEditable='false' href='#' onclick='injectCode(\'" + subxReq.responseText + "\');'>select</a>" + "<br />";
+		document.getElementById("SearchResult").innerHTML += " - <a contentEditable='false' href='#' onclick='injectCode(\'" + "https://visual-html.github.io/NotePad/" + GitHubResult.items[i].path + "\');'>select</a>" + "<br />";
 		//document.getElementById("SearchResult").innerHTML += subxReq.responseText.match(/<title>.*<\/title>/)[0].replace("<title>","").replace("</title>","");
 		// meta description /keywords to add
 		} catch(xcp) {}
@@ -46,7 +46,12 @@ if (GitHubResult.total_count > 0) {
 };
 	
 function injectCode(url) {
-	VH20.CurrentTarget.innerHTML += url.match(/<body>.*<\/body>/)[0].replace("<body>","").replace("</body>","");
+	
+	var xReq = new XMLHttpRequest();
+	xReq.open("GET", url, false);
+	xReq.send(null);
+	
+	VH20.CurrentTarget.innerHTML +=  xReq.response.match(/<body>.*<\/body>/)[0].replace("<body>","").replace("</body>","");
 };
 	
 </script>
